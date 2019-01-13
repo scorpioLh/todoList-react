@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import 'antd/dist/antd.css'
 import store from './store'
-import { getInputChangeAction, getAddItemAction, getDeleteItemAction, initListAction } from './store/actionCreators'
+import { getInputChangeAction, getAddItemAction, getDeleteItemAction, getTodoList } from './store/actionCreators'
 import TodoListUI from './TodoListUI'
-import axios from 'axios'
+// import axios from 'axios'
 
 class TodoList extends Component {
 	constructor(props) {
@@ -29,11 +29,8 @@ class TodoList extends Component {
 	}
 
 	componentDidMount() {
-		axios.get('/list.json').then(res => {
-			const data = res.data
-			const action = initListAction(data)
-			store.dispatch(action)
-		})
+		const action = getTodoList() // 此处返回的action为一个函数
+		store.dispatch(action)
 	}
 
 	handleStoreChange() {
